@@ -15,7 +15,7 @@ ul {
 
 section.tree-structure {
     width: 50%;
-    padding: 0 2rem 0 2rem;
+    background-color: aquamarine;
 }
 
 section.tree-structure-expected {
@@ -39,11 +39,18 @@ section.example {
     }
 }
 
+$border-img: url("../img/border.png");
+$dot-img: url("../img/dot.png");
+$border_width: 20px;
+$border-margin-right: 15px;
+
 ul.subnav {
+    padding-left: 0;
+
     li {
         a {
             display: flex;
-            padding: 0 0.75rem;
+            padding: 0;
             cursor: pointer;
             height: 56px;
             align-items: center;
@@ -52,10 +59,10 @@ ul.subnav {
             &::before {
                 content: " ";
                 display: inline-block;
-                width: 32px;
-                margin-right: 15px;
+                width: $border_width;
+                margin-right: $border-margin-right;
                 height: 100%;
-                background-image: url("../img/border.png");
+                background-image: $border-img;
                 background-repeat: no-repeat;
                 background-position: top center;
             }
@@ -63,15 +70,13 @@ ul.subnav {
     }
 
     > li {
-        border: 1px solid red;
-
         &:first-of-type {
             > a {
                 height: 57px;
                 &::before {
                     align-self: flex-end;
                     height: 30px;
-                    background-image: url("../img/border.png"), url("../img/dot.png");
+                    background-image: $border-img, $dot-img;
                 }
             }
         }
@@ -82,7 +87,7 @@ ul.subnav {
                 &::before {
                     align-self: flex-start;
                     height: 30px;
-                    background-image: url("../img/border.png"), url("../img/dot.png");
+                    background-image: $border-img, $dot-img;
                     background-position: bottom center;
                 }
             }
@@ -92,9 +97,36 @@ ul.subnav {
         &:first-of-type:last-of-type {
             > a {
                 &::before {
-                    background-image: url("../img/dot.png");
+                    background-image: $dot-img;
                 }
             }
         }
     }
+
+    ul.level-two :not(:last-of-type) li {
+        display: flex;
+        &::before {
+            content: " ";
+            width: $border_width;
+            margin-right: $border-margin-right;
+            background-image: $border-img;
+            background-repeat: repeat-y;
+            background-position: top center;
+        }
+    }
+}
+
+ul.level-one li {
+    padding-left: 16px;
+    background-color: rgb(242, 242, 168);
+}
+
+ul.level-two li {
+    padding-left: 32px;
+    background-color: rgb(199, 167, 255);
+}
+
+ul.level-three li {
+    padding-left: 0px; // important to keep parent left border in place
+    background-color: rgb(174, 249, 174);
 }
