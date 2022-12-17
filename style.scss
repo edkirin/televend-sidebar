@@ -39,28 +39,38 @@ section.example {
     }
 }
 
+// ------------------------------------------------
+
 $border-img: url("../img/border.png");
 $dot-img: url("../img/dot.png");
 $border_width: 20px;
 $border-margin-right: 15px;
-
-ul.level-one li {
-    padding-left: 16px;
-    background-color: rgb(242, 242, 168);
-}
-
-ul.level-two li {
-    padding-left: 32px;
-    background-color: rgb(199, 167, 255);
-}
-
-ul.level-three li {
-    padding-left: 32px;
-    background-color: rgb(174, 249, 174);
-}
+$left-padding-unit: 16px;
 
 ul.subnav {
-    padding-left: 0;
+    // debug colors: level one
+    > li {
+        background-color: rgb(242, 242, 168);
+    }
+    > li > ul > li {
+        background-color: rgb(199, 167, 255);
+    }
+    > li > ul > li > ul > li {
+        background-color: rgb(174, 249, 174);
+    }
+
+    // level one
+    padding-left: $left-padding-unit;
+
+    // level two
+    > li > ul {
+        padding-left: $left-padding-unit * 2;
+    }
+
+    // level three
+    > li > ul > li > ul {
+        padding-left: $left-padding-unit * 2;
+    }
 
     li {
         a {
@@ -71,8 +81,10 @@ ul.subnav {
             align-items: center;
             text-decoration: none;
 
+            // default: just border line
             &::before {
                 content: " ";
+                background-color: yellow;
                 display: inline-block;
                 width: $border_width;
                 margin-right: $border-margin-right;
@@ -82,13 +94,13 @@ ul.subnav {
                 background-position: top center;
             }
         }
-    }
 
-    > li {
+        // first item: dot + line down
         &:first-of-type {
             > a {
                 height: 57px;
                 &::before {
+                    background-color: transparent;
                     align-self: flex-end;
                     height: 30px;
                     background-image: $border-img, $dot-img;
@@ -96,10 +108,12 @@ ul.subnav {
             }
         }
 
+        // last item: dot + line up
         &:last-of-type {
             margin: 0;
             > a {
                 &::before {
+                    background-color: transparent;
                     align-self: flex-start;
                     height: 30px;
                     background-image: $border-img, $dot-img;
@@ -108,7 +122,7 @@ ul.subnav {
             }
         }
 
-        // single item - just a dot
+        // single item: just a dot
         &:first-of-type:last-of-type {
             > a {
                 &::before {
@@ -118,9 +132,10 @@ ul.subnav {
         }
     }
 
-    ul.level-two :not(:last-of-type) li {
+    // level three item: insert extra line left to connect level two items
+    > li > ul :not(:last-of-type) li {
         display: flex;
-        padding-left: 0;
+        margin-left: -$left-padding-unit * 2;
         &::before {
             content: " ";
             width: $border_width;
