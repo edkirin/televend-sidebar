@@ -44,6 +44,21 @@ $dot-img: url("../img/dot.png");
 $border_width: 20px;
 $border-margin-right: 15px;
 
+ul.level-one li {
+    padding-left: 16px;
+    background-color: rgb(242, 242, 168);
+}
+
+ul.level-two li {
+    padding-left: 32px;
+    background-color: rgb(199, 167, 255);
+}
+
+ul.level-three li {
+    padding-left: 32px;
+    background-color: rgb(174, 249, 174);
+}
+
 ul.subnav {
     padding-left: 0;
 
@@ -105,6 +120,7 @@ ul.subnav {
 
     ul.level-two :not(:last-of-type) li {
         display: flex;
+        padding-left: 0;
         &::before {
             content: " ";
             width: $border_width;
@@ -114,19 +130,4 @@ ul.subnav {
             background-position: top center;
         }
     }
-}
-
-ul.level-one li {
-    padding-left: 16px;
-    background-color: rgb(242, 242, 168);
-}
-
-ul.level-two li {
-    padding-left: 32px;
-    background-color: rgb(199, 167, 255);
-}
-
-ul.level-three li {
-    padding-left: 0px; // important to keep parent left border in place
-    background-color: rgb(174, 249, 174);
 }
