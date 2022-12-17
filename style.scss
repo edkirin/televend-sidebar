@@ -7,29 +7,12 @@ body {
 
 .wrapper {
     display: flex;
-}
-
-ul {
-    list-style-type: none;
+    column-gap: 1rem;
 }
 
 section.tree-structure {
-    width: 50%;
-    background-color: aquamarine;
-}
-
-section.tree-structure-expected {
-    width: 50%;
-    padding: 0 2rem 0 2rem;
-    .selected-first {
-        color: green;
-    }
-    .selected-last {
-        color: red;
-    }
-    .not-selected {
-        color: black;
-    }
+    background-color: rgb(195, 253, 234);
+    flex-grow: 1;
 }
 
 section.example {
@@ -47,16 +30,20 @@ $border_width: 20px;
 $border-margin-right: 15px;
 $left-padding-unit: 16px;
 
+ul {
+    list-style-type: none;
+}
+
 ul.subnav {
     // debug colors: level one
     > li {
-        background-color: rgb(242, 242, 168);
+        // background-color: rgb(242, 242, 168);
     }
     > li > ul > li {
-        background-color: rgb(199, 167, 255);
+        // background-color: rgb(199, 167, 255);
     }
     > li > ul > li > ul > li {
-        background-color: rgb(174, 249, 174);
+        // background-color: rgb(174, 249, 174);
     }
 
     // level one
@@ -84,7 +71,6 @@ ul.subnav {
             // default: just border line
             &::before {
                 content: " ";
-                background-color: yellow;
                 display: inline-block;
                 width: $border_width;
                 margin-right: $border-margin-right;

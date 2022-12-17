@@ -14,7 +14,36 @@
 
     <div class="wrapper">
         <section class="tree-structure">
-            <h3>Playground</h3>
+            <ul class="subnav">
+                <li><a href="#">First Level</a></li>
+                <li>
+                    <a href="#">First Level</a>
+                    <ul>
+                        <li><a href="#">Second Level</a></li>
+                        <li>
+                            <a href="#">Second Level</a>
+                            <ul>
+                                <li><a href="#">Third Level</a></li>
+                                <li><a href="#">Third Level</a></li>
+                                <li><a href="#">Third Level</a></li>
+                                <li><a href="#">Third Level</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="#">Second Level</a>
+                            <ul>
+                                <li><a href="#">Third Level</a></li>
+                                <li><a href="#">Third Level</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="#">Second Level</a></li>
+                    </ul>
+                </li>
+                <li><a href="#">First Level</a></li>
+            </ul>
+        </section>
+
+        <section class="tree-structure">
             <ul class="subnav">
                 <li><a href="#">First Level</a></li>
                 <li>
@@ -42,7 +71,11 @@
                         <li><a href="#">Second Level</a></li>
                     </ul>
                 </li>
-                <!-- <li><a href="#">First Level</a></li>
+            </ul>
+        </section>
+
+        <section class="tree-structure">
+            <ul class="subnav">
                 <li><a href="#">First Level</a></li>
                 <li>
                     <a href="#">First Level</a>
@@ -50,48 +83,8 @@
                         <li><a href="#">Second Level</a></li>
                         <li><a href="#">Second Level</a></li>
                         <li><a href="#">Second Level</a></li>
-                        <li><a href="#">Second Level</a></li>
-                        <li><a href="#">Second Level</a></li>
-                    </ul>
-                </li>-->
-                <li><a href="#">First Level</a></li>
-            </ul>
-        </section>
-
-        <section class="tree-structure-expected">
-            <h3>Expected</h3>
-            <ul class="level-one">
-                <li class="selected-first">First Level</li>
-                <li class="selected-first selected-last">
-                    First Level
-                    <ul class="level-two">
-                        <li class="selected-first">Second Level</li>
-                        <li class="not-selected">Second Level</li>
-                        <li class="not-selected">Second Level</li>
-                        <li class="not-selected">Second Level</li>
-                        <li class="selected-last">
-                            Second Level
-                            <ul class="level-three">
-                                <li class="selected-first">Third Level</li>
-                                <li class="not-selected">Third Level</li>
-                                <li class="not-selected">Third Level</li>
-                                <li class="selected-last">Third Level</li>
-                            </ul>
-                        </li>
                     </ul>
                 </li>
-                <li class="selected-first">First Level</li>
-                <li class="not-selected">First Level</li>
-                <li class="selected-last">
-                    First Level
-                    <ul class="level-two">
-                        <li class="selected-first">Second Level</li>
-                        <li class="not-selected">Second Level</li>
-                        <li class="not-selected">Second Level</li>
-                        <li class="selected-last">Second Level</li>
-                    </ul>
-                </li>
-                <li class="selected-last">First Level</li>
             </ul>
         </section>
     </div>
