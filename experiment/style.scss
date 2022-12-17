@@ -1,0 +1,134 @@
+body {
+    font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande", "Lucida Sans Unicode", Geneva, Verdana,
+        sans-serif;
+    font-size: 14pt;
+    padding: 1rem 5rem;
+}
+
+.wrapper {
+    display: flex;
+    column-gap: 1rem;
+}
+
+section.tree-structure {
+    background-color: rgb(195, 253, 234);
+    flex-grow: 1;
+}
+
+section.example {
+    margin-top: 5rem;
+    img {
+        max-width: 100%;
+    }
+}
+
+// ------------------------------------------------
+
+$border-img: url("../img/border.png");
+$dot-img: url("../img/dot.png");
+$border_width: 20px;
+$border-margin-right: 15px;
+$left-padding-unit: 16px;
+
+ul {
+    list-style-type: none;
+}
+
+ul.subnav {
+    // debug colors: level one
+    > li {
+        // background-color: rgb(242, 242, 168);
+    }
+    > li > ul > li {
+        // background-color: rgb(199, 167, 255);
+    }
+    > li > ul > li > ul > li {
+        // background-color: rgb(174, 249, 174);
+    }
+
+    // level one
+    padding-left: $left-padding-unit;
+
+    // level two
+    > li > ul {
+        padding-left: $left-padding-unit * 2;
+    }
+
+    // level three
+    > li > ul > li > ul {
+        padding-left: $left-padding-unit * 2;
+    }
+
+    li {
+        a {
+            display: flex;
+            padding: 0;
+            cursor: pointer;
+            height: 56px;
+            align-items: center;
+            text-decoration: none;
+
+            // default: just border line
+            &::before {
+                content: " ";
+                display: inline-block;
+                width: $border_width;
+                margin-right: $border-margin-right;
+                height: 100%;
+                background-image: $border-img;
+                background-repeat: no-repeat;
+                background-position: top center;
+            }
+        }
+
+        // first item: dot + line down
+        &:first-of-type {
+            > a {
+                height: 57px;
+                &::before {
+                    background-color: transparent;
+                    align-self: flex-end;
+                    height: 30px;
+                    background-image: $border-img, $dot-img;
+                }
+            }
+        }
+
+        // last item: dot + line up
+        &:last-of-type {
+            margin: 0;
+            > a {
+                &::before {
+                    background-color: transparent;
+                    align-self: flex-start;
+                    height: 30px;
+                    background-image: $border-img, $dot-img;
+                    background-position: bottom center;
+                }
+            }
+        }
+
+        // single item: just a dot
+        &:first-of-type:last-of-type {
+            > a {
+                &::before {
+                    background-image: $dot-img;
+                }
+            }
+        }
+    }
+
+    // level three item: insert extra line left to connect level two items
+    > li > ul :not(:last-of-type) li {
+        display: flex;
+        margin-left: -$left-padding-unit * 2;
+        &::before {
+            content: " ";
+            width: $border_width;
+            margin-right: $border-margin-right;
+            background-image: $border-img;
+            background-repeat: repeat-y;
+            background-position: top center;
+        }
+    }
+}
