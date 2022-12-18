@@ -21,6 +21,27 @@ $level-one-indent: $icon-width;
 $border-img: url("../img/border.png");
 $dot-img: url("../img/dot.png");
 
+$border-width: 20px;
+$border-margin-right: 15px;
+
+@mixin variable-left-border-connector($indent) {
+    :not(:last-of-type) li {
+        position: relative;
+        &::before {
+            content: " ";
+            width: $border-width;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: $indent;
+            margin-right: $border-margin-right;
+            background-image: $border-img;
+            background-repeat: repeat-y;
+            background-position: top center;
+        }
+    }
+}
+
 nav.main {
     li {
         border-bottom: 1px solid $border-color;
@@ -86,57 +107,85 @@ nav.main {
     // subnav level 1
     ul.subnav {
         border-top: 1px solid $border-color;
-        // reset parent borders
         li {
+            // reset parent borders
             border-bottom: none;
             &:first-of-type {
                 border-top: none;
             }
-        }
-
-        > li {
-            // default: just border line
-            background-image: $border-img;
-            background-repeat: repeat-y;
-            background-position: $level-one-indent / 2 center;
 
             a {
                 padding-left: $level-one-indent;
+                position: relative;
+                &::before {
+                    content: " ";
+                    width: $border-width;
+                    height: 100%;
+                    position: absolute;
+                    top: 0;
+                    left: $subnav-indent;
+                    margin-right: $border-margin-right;
+                    background-image: $border-img;
+                    background-repeat: no-repeat;
+                    background-position: top center;
+                }
             }
+            // first item: dot + line down
+            &:first-of-type {
+                > a {
+                    &::before {
+                        background-image: $border-img, $dot-img;
+                        top: 20px; // hardcoded!
+                    }
+                }
+            }
+            // last item: dot + line up
+            &:last-of-type {
+                > a {
+                    &::before {
+                        background-image: $border-img, $dot-img;
+                        background-position: bottom;
+                        top: -20px; // hardcoded!
+                    }
+                }
+            }
+            // single item: just a dot
+            &:first-of-type:last-of-type {
+                > a {
+                    &::before {
+                        background-image: $dot-img;
+                    }
+                }
+            }
+            @include variable-left-border-connector($subnav-indent * 4);
 
             // subnav level 2
             > ul {
-                > li {
-                    background-image: $border-img;
-                    background-repeat: repeat-y;
-                    background-position: $subnav-indent * 5 center;
+                li {
                     a {
-                        color: blue;
                         padding-left: $subnav-indent * 7;
-                    }
-                    &:first-child a {
-                        // reset parent properties
-                        border: none;
+                        &::before {
+                            left: $subnav-indent * 4;
+                        }
                     }
                     // subnav level 3
                     > ul {
-                        > li {
-                            background-image: $border-img;
-                            background-repeat: repeat-y;
-                            background-position: $subnav-indent * 7 center;
+                        li {
                             a {
-                                color: red;
-                                padding-left: $subnav-indent * 9;
+                                padding-left: $subnav-indent * 10;
+                                &::before {
+                                    left: $subnav-indent * 7;
+                                }
                             }
+
                             // subnav level 4
                             > ul {
                                 > li {
-                                    background-image: $border-img;
-                                    background-repeat: repeat-y;
-                                    background-position: $subnav-indent * 9 center;
                                     a {
-                                        color: green;
-                                        padding-left: $subnav-indent * 11;
+                                        padding-left: $subnav-indent * 13;
+                                        &::before {
+                                            left: $subnav-indent * 10;
+                                        }
                                     }
                                 }
                             }
@@ -146,4 +195,6 @@ nav.main {
             }
         }
     }
+
+    @include variable-left-border-connector($subnav-indent * 1);
 }
