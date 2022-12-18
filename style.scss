@@ -7,7 +7,8 @@ body {
 section.sidebar {
     width: 320px;
     background-color: #f8f9fa;
-    border: 1px solid #cdcdcd;
+    border-left: 1px solid #cdcdcd;
+    border-right: 1px solid #cdcdcd;
 }
 
 // ----------------------------------------------------------------------------------
@@ -18,12 +19,21 @@ $subnav-indent: 16px;
 $icon-width: 50px;
 
 nav.main {
+    li {
+        border-bottom: 1px solid $border-color;
+        &:first-of-type {
+            border-top: 1px solid $border-color;
+        }
+    }
+
     li > a {
         display: block;
         padding: 15px 0;
         text-decoration: none;
         color: $text-color;
-        border-top: 1px solid $border-color;
+        &:hover {
+            background-color: rgba($text-color, 0.03);
+        }
     }
 
     // level 0: main items
@@ -67,41 +77,50 @@ nav.main {
                     background-image: url("/img/menu-icons/dashboard.svg");
                 }
             }
+        }
+    }
 
-            // subnav level 1
+    // subnav level 1
+    ul.subnav {
+        border-top: 1px solid $border-color;
+        // reset parent borders
+        li {
+            border-bottom: none;
+            &:first-of-type {
+                border-top: none;
+            }
+        }
+
+        > li {
+            a {
+                padding-left: $subnav-indent;
+            }
+
+            // subnav level 2
             > ul {
                 // padding-left: $subnav-indent;
                 > li {
                     a {
-                        padding-left: $subnav-indent;
-                        border: none;
-                        &:hover {
-                            background-color: rgba($text-color, 0.03);
-                        }
+                        color: blue;
+                        padding-left: $subnav-indent * 2;
                     }
-
-                    // subnav level 2
+                    &:first-child a {
+                        // reset parent properties
+                        border: none;
+                    }
+                    // subnav level 3
                     > ul {
-                        // padding-left: $subnav-indent;
                         > li {
                             a {
-                                color: blue;
+                                color: red;
+                                padding-left: $subnav-indent * 3;
                             }
-                            // subnav level 3
+                            // subnav level 4
                             > ul {
-                                // padding-left: $subnav-indent;
                                 > li {
                                     a {
-                                        color: red;
-                                    }
-                                    // subnav level 4
-                                    > ul {
-                                        // padding-left: $subnav-indent;
-                                        > li {
-                                            a {
-                                                color: green;
-                                            }
-                                        }
+                                        color: green;
+                                        padding-left: $subnav-indent * 4;
                                     }
                                 }
                             }
