@@ -148,12 +148,15 @@ nav.main {
                         top: -20px; // hardcoded!
                     }
                 }
-            }
-            // single item: just a dot
-            &:first-of-type:last-of-type {
-                > a {
+                // single item: just a dot
+                &:first-of-type:last-of-type {
                     &::before {
-                        background-image: $dot-img;
+                        // background-image: none;
+                    }
+                    > a {
+                        &::before {
+                            background-image: $dot-img;
+                        }
                     }
                 }
             }
@@ -168,6 +171,8 @@ nav.main {
                             left: $subnav-indent * 4;
                         }
                     }
+                    @include variable-left-border-connector($subnav-indent * 7);
+
                     // subnav level 3
                     > ul {
                         li {
@@ -177,10 +182,11 @@ nav.main {
                                     left: $subnav-indent * 7;
                                 }
                             }
+                            @include variable-left-border-connector($subnav-indent * 10);
 
                             // subnav level 4
                             > ul {
-                                > li {
+                                li {
                                     a {
                                         padding-left: $subnav-indent * 13;
                                         &::before {
