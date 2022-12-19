@@ -42,6 +42,19 @@ $border-margin-right: 15px;
     }
 }
 
+@mixin reset-single-item-background($li-background-image) {
+    &:first-of-type:last-of-type {
+        &::before {
+            background-image: $li-background-image;
+        }
+        > a {
+            &::before {
+                background-image: $dot-img;
+            }
+        }
+    }
+}
+
 nav.main {
     li {
         border-bottom: 1px solid $border-color;
@@ -148,18 +161,8 @@ nav.main {
                         top: -20px; // hardcoded!
                     }
                 }
-                // single item: just a dot
-                &:first-of-type:last-of-type {
-                    &::before {
-                        // background-image: none;
-                    }
-                    > a {
-                        &::before {
-                            background-image: $dot-img;
-                        }
-                    }
-                }
             }
+            @include reset-single-item-background(none);
             @include variable-left-border-connector($subnav-indent * 4);
 
             // subnav level 2
@@ -171,29 +174,25 @@ nav.main {
                             left: $subnav-indent * 4;
                         }
                     }
+                    @include reset-single-item-background($border-img);
                     @include variable-left-border-connector($subnav-indent * 7);
 
                     // subnav level 3
-                    > ul {
-                        li {
-                            a {
-                                padding-left: $subnav-indent * 10;
-                                &::before {
-                                    left: $subnav-indent * 7;
-                                }
+                    > ul li {
+                        a {
+                            padding-left: $subnav-indent * 10;
+                            &::before {
+                                left: $subnav-indent * 7;
                             }
-                            @include variable-left-border-connector($subnav-indent * 10);
+                        }
+                        @include reset-single-item-background($border-img);
+                        @include variable-left-border-connector($subnav-indent * 10);
 
-                            // subnav level 4
-                            > ul {
-                                li {
-                                    a {
-                                        padding-left: $subnav-indent * 13;
-                                        &::before {
-                                            left: $subnav-indent * 10;
-                                        }
-                                    }
-                                }
+                        // subnav level 4
+                        > ul li a {
+                            padding-left: $subnav-indent * 13;
+                            &::before {
+                                left: $subnav-indent * 10;
                             }
                         }
                     }
