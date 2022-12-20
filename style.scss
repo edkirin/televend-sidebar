@@ -20,6 +20,7 @@ $icon-width: 50px;
 $level-one-indent: $icon-width;
 $border-img: url("../img/border.png");
 $dot-img: url("../img/dot.png");
+$expand-arrow-height: 18px;
 
 $border-width: 20px;
 $border-margin-right: 15px;
@@ -61,68 +62,77 @@ nav.main {
         &:first-of-type {
             border-top: 1px solid $border-color;
         }
-    }
-
-    li > a {
-        display: block;
-        padding: 15px 0;
-        text-decoration: none;
-        color: $text-color;
-        &:hover {
-            background-color: rgba($text-color, 0.03);
+        > a {
+            display: block;
+            padding: 15px 0;
+            text-decoration: none;
+            color: $text-color;
+            &:hover {
+                background-color: rgba($text-color, 0.03);
+            }
         }
     }
 
-    // level 0: main items
     ul {
         list-style-type: none;
         padding: 0;
         margin: 0;
-        > li {
-            a.icon {
-                position: relative;
-                padding-left: $icon-width;
-                display: flex;
-                align-items: center;
+    }
 
-                &::before {
-                    content: "";
-                    position: absolute;
-                    top: 0;
-                    left: 0;
-                    width: $icon-width;
-                    height: 100%;
-                    background-position: center center;
-                    background-size: 22px 22px;
-                    background-repeat: no-repeat;
-                }
+    // level 0: main items
+    > ul > li {
+        a.icon {
+            position: relative;
+            padding-left: $icon-width;
+            display: flex;
+            align-items: center;
 
-                &.icon-dashboard::before {
-                    background-image: url("/img/menu-icons/dashboard.svg");
-                }
-                &.icon-machines::before {
-                    background-image: url("/img/menu-icons/machines.svg");
-                }
-                &.icon-events::before {
-                    background-image: url("/img/menu-icons/events.svg");
-                }
-                &.icon-reports::before {
-                    background-image: url("/img/menu-icons/reports.svg");
-                }
-                &.icon-call-center::before {
-                    background-image: url("/img/menu-icons/call-center.svg");
-                }
-                &.icon-warehouse-management::before {
-                    background-image: url("/img/menu-icons/dashboard.svg");
-                }
+            // main icons
+            &::before {
+                content: "";
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: $icon-width;
+                height: 100%;
+                background-position: center center;
+                background-size: 22px 22px;
+                background-repeat: no-repeat;
+                filter: opacity(69%); // make icons transparent (black -> grayish)
+            }
+
+            &.icon-dashboard::before {
+                background-image: url("/img/menu-icons/dashboard.svg");
+            }
+            &.icon-machines::before {
+                background-image: url("/img/menu-icons/machines.svg");
+            }
+            &.icon-events::before {
+                background-image: url("/img/menu-icons/events.svg");
+            }
+            &.icon-reports::before {
+                background-image: url("/img/menu-icons/reports.svg");
+            }
+            &.icon-call-center::before {
+                background-image: url("/img/menu-icons/call-center.svg");
+            }
+            &.icon-warehouse-management::before {
+                background-image: url("/img/menu-icons/dashboard.svg");
+            }
+            &::after {
+                content: "";
+                margin-left: auto;
+                width: $expand-arrow-height / 2;
+                height: $expand-arrow-height;
+                margin-right: 10px;
+                background-repeat: no-repeat;
+                background-image: url("/img/menu-icons/menu-arrow.svg");
+                transition: transform 0.3s;
+                transform-origin: 50% 50%;
+            }
+            &.collapsable:not(.collapsed) {
                 &::after {
-                    content: "";
-                    margin-left: auto;
-                    width: 18px;
-                    height: 18px;
-                    display: block;
-                    background-repeat: no-repeat;
-                    background-image: url("/img/menu-icons/menu-arrow.svg");
+                    transform: rotate(90deg);
                 }
             }
         }
@@ -131,6 +141,7 @@ nav.main {
     // subnav level 1
     ul.subnav {
         border-top: 1px solid $border-color;
+
         li {
             // reset parent borders
             border-bottom: none;
@@ -210,7 +221,6 @@ nav.main {
                 }
             }
         }
+        @include variable-left-border-connector($subnav-indent * 1);
     }
-
-    @include variable-left-border-connector($subnav-indent * 1);
 }
