@@ -82,6 +82,8 @@ nav.main {
             a.icon {
                 position: relative;
                 padding-left: $icon-width;
+                display: flex;
+                align-items: center;
 
                 &::before {
                     content: "";
@@ -112,6 +114,15 @@ nav.main {
                 }
                 &.icon-warehouse-management::before {
                     background-image: url("/img/menu-icons/dashboard.svg");
+                }
+                &::after {
+                    content: "";
+                    margin-left: auto;
+                    width: 18px;
+                    height: 18px;
+                    display: block;
+                    background-repeat: no-repeat;
+                    background-image: url("/img/menu-icons/menu-arrow.svg");
                 }
             }
         }
