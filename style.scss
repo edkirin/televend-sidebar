@@ -13,17 +13,39 @@ section.sidebar {
 
 // ----------------------------------------------------------------------------------
 
+$image-path: "/img"; // image path without trailing slash
 $text-color: #1f1f1f;
 $border-color: #cdcdcd;
 $subnav-indent: 10px;
 $icon-width: 50px;
 $level-one-indent: $icon-width;
-$border-img: url("../img/border.png");
-$dot-img: url("../img/dot.png");
+$border-img: url("#{$image-path}/border.png");
+$dot-img: url("#{$image-path}/dot.png");
 $expand-arrow-height: 18px;
 
 $border-width: 20px;
 $border-margin-right: 15px;
+
+// menu icons in format "icon class": "svg filename"
+$menu-icons: (
+    "icon-administration": "administration.svg",
+    "icon-call-center": "call-center.svg",
+    "icon-contract-center": "contract-center.svg",
+    "icon-custom-forms": "custom-forms.svg",
+    "icon-dashboard": "dashboard.svg",
+    "icon-events": "events.svg",
+    "icon-evoca-horeca": "evoca-horeca.svg",
+    "icon-fiscal-devices": "fiscal-devices.svg",
+    "icon-machines": "machines.svg",
+    "icon-menu-arrow": "menu-arrow.svg",
+    "icon-reports": "reports.svg",
+    "icon-routes": "routes.svg",
+    "icon-switch-to-desktop": "switch-to-desktop.svg",
+    "icon-switch-to-mobile": "switch-to-mobile.svg",
+    "icon-tax-center": "tax-center.svg",
+    "icon-technical-center": "technical-center.svg",
+    "icon-warehouse-management": "warehouse-management.svg",
+);
 
 @mixin variable-left-border-connector($indent) {
     :not(:last-of-type) li {
@@ -101,24 +123,13 @@ nav.main {
                 filter: opacity(69%); // make icons transparent (black -> grayish)
             }
 
-            &.icon-dashboard::before {
-                background-image: url("/img/menu-icons/dashboard.svg");
+            // define menu icons
+            @each $icon-class, $icon-file in $menu-icons {
+                &.#{$icon-class}::before {
+                    background-image: url("#{$image-path}/menu-icons/#{$icon-file}");
+                }
             }
-            &.icon-machines::before {
-                background-image: url("/img/menu-icons/machines.svg");
-            }
-            &.icon-events::before {
-                background-image: url("/img/menu-icons/events.svg");
-            }
-            &.icon-reports::before {
-                background-image: url("/img/menu-icons/reports.svg");
-            }
-            &.icon-call-center::before {
-                background-image: url("/img/menu-icons/call-center.svg");
-            }
-            &.icon-warehouse-management::before {
-                background-image: url("/img/menu-icons/dashboard.svg");
-            }
+
             &::after {
                 content: "";
                 margin-left: auto;
@@ -126,7 +137,7 @@ nav.main {
                 height: $expand-arrow-height;
                 margin-right: 10px;
                 background-repeat: no-repeat;
-                background-image: url("/img/menu-icons/menu-arrow.svg");
+                background-image: url("#{$image-path}/menu-icons/menu-arrow.svg");
                 transition: transform 0.3s;
                 transform-origin: 50% 50%;
             }
